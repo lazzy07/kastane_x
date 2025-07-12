@@ -3,8 +3,7 @@ project(Kastane-X LANGUAGES CXX CUDA)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/dist)
 
-# ---- pick the GPU architectures you need -----------------------------------
-# 86 = Ampere laptop/desktop (RTX 30-series), 89 = Ada (RTX 40), 90 = Hopper
-set(CMAKE_CUDA_ARCHITECTURES 89) 
+# Automatically detect and set the GPU architecture
+set(CMAKE_CUDA_ARCHITECTURES native) 
 
 add_executable(kastane_x src/main.cu)
