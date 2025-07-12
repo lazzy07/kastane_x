@@ -1,0 +1,30 @@
+name: Kastane-X
+
+services:
+  kastane-engine:
+    build:
+      context: .
+      target: dev # use the stage that HAS cmake/ninja
+    command: >
+      bash -lc "
+        cmake -S . -B build -G Ninja &&
+        cmake --build build -j$(nproc) &&
+        ./dist/kastane_x
+      "
+
+    # ── expose GPUs
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: ["gpu"]
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
