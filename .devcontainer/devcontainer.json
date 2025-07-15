@@ -1,0 +1,22 @@
+{
+  "name": "Kastane‑X Dev",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "kastane-engine",
+  "workspaceFolder": "/workspace",
+
+  // ---- VS Code bits live here in spec 2 ----
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",          // C/C++ IntelliSense
+        "nvidia.nsight-vscode-edition" // CUDA helper
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  // run once after the container is first created
+  "postCreateCommand": "cmake -S . -B build -G Ninja"
+}
