@@ -1,5 +1,6 @@
 #include <stdio.h>
 
-int main(){
-  printf("Hello World");
+int hello(){
+  printf("Hello World from cuda");
+  return 0;
 }
