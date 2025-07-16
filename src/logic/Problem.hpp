@@ -1,21 +1,27 @@
 #pragma once
 #include <vector>
-
+#include <unordered_map>
 #include "Action.hpp"
-#include "MaskedState.hpp"
+#include "Entity.hpp"
 
 namespace KX {
   namespace Logic{
     class Problem{
       public:
-        Problem(std::string name, std::vector<Object> objects, std::vector<Action> actions);
+        Problem(std::string name);
 
-        [[nodiscard]] const std::vector<Action>& getActions() const noexcept {return m_Actions;};
-        [[nodiscard]] const std::vector<Object>& getObjects() const noexcept {return m_Objects;};
+        ObjectType* CreateObjectType(std::string name, ObjectType* parent = nullptr);
+        Entity* CreateEntity(std::string name, ObjectType* objectType);
+        Action* CreateAction(std::string name, std::vector<ObjectType*> parameterTypes);
+
+        [[nodiscard]] const std::string& getName() const noexcept {return m_Name; };
+        [[nodiscard]] const std::unordered_map<std::string, Action>& getActions() const noexcept {return m_Actions;};
+        [[nodiscard]] const std::unordered_map<std::string, ObjectType>& getObjectTypes() const noexcept {return m_ObjectTypes;};
       private:
         std::string m_Name;
-        std::vector<Object> m_Objects;
-        std::vector<Action> m_Actions;
+        std::unordered_map<std::string, ObjectType> m_ObjectTypes;
+        std::unordered_map<std::string, Action> m_Actions;
+        std::unordered_map<std::string, Entity> m_Entities;
     };
   };
 };
