@@ -1,0 +1,34 @@
+type Object;
+type Table : Object;
+type Box : Object;
+
+entity table: Table;
+entity box1: Box;
+entity box2: Box;
+entity box3: Box;
+
+
+property clear(object: Object) : bool;
+property on(object: Object, object: Object) : bool;
+
+action move(box: Box, from: Object, to: Box){
+  precondition:
+    on(box, from) ^ clear(box) ^ clear(to);
+  effect:
+    on(box, to) ^ clear(from) ^ !on(box, from) ^ !clear(to);
+}
+
+action moveToTable(box: Box, from: Object){
+  precondition:
+    on(box, from) ^ clear(box);
+  effect:
+    on(box, table) ^ clear(from) ^ !on(box, from);
+}
+
+state {
+  initial:
+    on(box1, table) ^ on(box2, table) ^ on(box3, table) ^ clear(box1) ^ clear(box2) ^ clear(box3);
+  goal:
+    on(box1, box2) ^ on(box2, box3)
+}
+
