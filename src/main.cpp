@@ -11,4 +11,6 @@ int main(){
   KX::Test::BoxWorldTest test = KX::Test::BoxWorldTest();
   test.run();
   // engine.StartServer();
+
+  return 0;
 }

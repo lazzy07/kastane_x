@@ -4,7 +4,7 @@
 
 KX::Logic::Problem::Problem(std::string name): m_Name(name)
 {
-  std::cout << "Logic Problem: " + name + " created!" << std::endl;
+  std::cout << "Problem: " + name + " created!" << std::endl;
 }
 
 KX::Logic::ObjectType* KX::Logic::Problem::CreateObjectType(std::string name, ObjectType* parent)
@@ -13,7 +13,7 @@ KX::Logic::ObjectType* KX::Logic::Problem::CreateObjectType(std::string name, Ob
   ObjectType type = ObjectType(id, name, parent);
   m_ObjectTypes.insert({name, type});
 
-  std::cout << "Type: \t" + name + "\t with ID: " + std::to_string(id) << " created!" << std::endl;
+  std::cout << "Type: " + name + " with ID: " + std::to_string(id) << " created!" << std::endl;
 
   return &m_ObjectTypes.at(name);
 }
@@ -24,7 +24,7 @@ KX::Logic::Entity* KX::Logic::Problem::CreateEntity(std::string name, ObjectType
   Entity entity = Entity(id, objectType, name);
   m_Entities.insert({name, entity});
 
-  std::cout << "Entity: \t" + name + "\t with ID: " + std::to_string(id) << " created!" << std::endl;
+  std::cout << "Entity: " + name + " with ID: " + std::to_string(id) << " created!" << std::endl;
 
   return &m_Entities.at(name);
 }
@@ -38,7 +38,7 @@ KX::Logic::Action* KX::Logic::Problem::CreateAction(std::string name, std::vecto
     action.m_Parameters.push_back(param);
   }
 
-  std::cout << "Action: \t" + action.m_Name + "\t with ID: " + std::to_string(action.id) + " created!" << std::endl;
+  std::cout << "Action: " + action.m_Name + " with ID: " + std::to_string(action.id) + " created!" << std::endl;
 
   m_Actions.insert({name, action});
   return &m_Actions.at(name);
